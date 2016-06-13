@@ -1,0 +1,9 @@
+---
+buildpack: https://github.com/cloudfoundry/java-buildpack
+applications:
+- name: jhipsterback
+  instances: 1
+  memory: 1024M
+  path: build/libs/widget-test-0.0.1-SNAPSHOT.war
+  env:
+    SPRING_PROFILES_ACTIVE: dev

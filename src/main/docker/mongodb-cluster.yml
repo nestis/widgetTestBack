@@ -1,0 +1,17 @@
+version: '2'
+services:
+    widgettest-mongodb:
+        container_name: widgettest-mongodb
+        image: mongo:3.3.5
+        ports:
+            - "27017:27017"
+        command: mongos --configdb widgettest-mongodb-config
+    widgettest-mongodb-node:
+        build:
+            context: .
+            dockerfile: mongodb/MongoDB.Dockerfile
+        command: mongod --replSet rs1 --noprealloc --smallfiles
+    widgettest-mongodb-config:
+        image: mongo:3.3.5
+        container_name: widgettest-mongodb-config
+        command: mongod --noprealloc --smallfiles --configsvr --dbpath /data/db
